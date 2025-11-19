@@ -11,7 +11,7 @@ const HomeScreen = ({navigation}) => {
 
   //CHECK BALANCE CODE
   const [balance, setBalance] = useState("...");
-  const [fullName, setFullName] = useState("...");
+  const [fullName, setFullName] = useState(null); // null means guest mode
 
   // Load fullName from AsyncStorage when component mounts
  useEffect(() => {
@@ -27,7 +27,7 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem("userName"); // clear saved user
+    await AsyncStorage.multiRemove(["userName", "userPhone"]);// clear saved user
     setFullName(null); // reset to guest mode
 
   };
@@ -62,7 +62,7 @@ const HomeScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <Text style={styles.balance}>
-            {balanceVisible ? `Ghc ${balance}` : "••••••"}
+            {balanceVisible ? `Ghc ${balance}` : "Ghc ••••••"}
           </Text>
         </View>
 

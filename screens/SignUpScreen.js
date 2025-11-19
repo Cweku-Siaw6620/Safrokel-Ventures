@@ -41,6 +41,7 @@ const SignUpScreen = ({ navigation }) => {
       const savedUser = data.user;
       // save fullName to storage
       await AsyncStorage.setItem("userName", savedUser.fullName);
+      await AsyncStorage.setItem("userPhone", data.user.phoneNumber);
       
     Alert.alert("Success", "Account created successfully", [
       { text: "OK", onPress: () => navigation.navigate("HomeTabs") },
